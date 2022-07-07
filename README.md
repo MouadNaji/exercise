@@ -1,4 +1,4 @@
-# exercise
+# Minlæring exercise
 
 ## Project setup
 ```
