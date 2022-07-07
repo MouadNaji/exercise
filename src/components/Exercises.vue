@@ -22,6 +22,9 @@
           <p class="mt-1 text-lg font-medium text-gray-900">
             {{ exercise.title }}
           </p>
+          <p class="mt-1 text-lg font-medium text-gray-400">
+            {{ exercise.type }}
+          </p>
         </a>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 h-screen rounded-xl overflow-scroll">
+  <div class="bg-red-400 h-screen overflow-scroll md:fixed top-0 right-0">
     <div
       class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"
     >
