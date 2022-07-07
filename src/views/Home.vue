@@ -1,17 +1,20 @@
 <template>
-  <div class="home">
-    <HelloWorld class="text-red-400 text-xl" msg="Welcome to Your Vue.js App" />
+  <div class="m-10 grid grid-cols-4">
+    <Exercises class="md:col-span-3 col-span-4" />
+    <Selected class="md:col-span-1 col-span-3" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Exercises from "@/components/Exercises.vue";
+import Selected from "@/components/Selected.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    Exercises,
+    Selected,
   },
 };
 </script>
