@@ -9,17 +9,18 @@
       <div
         class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
       >
-        <a v-for="product in products" :key="product.id" class="group">
+        <a v-for="exercise in $store.state.exercises" :key="exercise.id" class="group">
           <div
+          @click.once="select(exercise.id)"
             class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8"
           >
             <img
-              :src="product.imageSrc"
+              :src="exercise.img"
               class="w-full h-full object-center object-cover group-hover:opacity-75"
             />
           </div>
           <p class="mt-1 text-lg font-medium text-gray-900">
-            {{ product.name }}
+            {{ exercise.title }}
           </p>
         </a>
       </div>
@@ -28,56 +29,71 @@
 </template>
 
 <script>
-const products = [
-  {
-    id: 1,
-    name: "Intermediate exercise",
-    Type: "lorem",
-    imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
-  },
-  {
-    id: 1,
-    name: "Intermediate exercise",
-    Type: "lorem",
-    imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
-  },
-  {
-    id: 1,
-    name: "Intermediate exercise",
-    Type: "lorem",
-    imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
-  },
-  {
-    id: 1,
-    name: "Intermediate exercise",
-    Type: "lorem",
-    imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
-  },
-  {
-    id: 1,
-    name: "Intermediate exercise",
-    Type: "lorem",
-    imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
-  },
-  {
-    id: 1,
-    name: "Intermediate exercise",
-    Type: "lorem",
-    imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
-  },
-];
+// const products = [
+//   {
+//     id: 1,
+//     name: "Intermediate exercise",
+//     Type: "lorem",
+//     imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
+//   },
+//   {
+//     id: 1,
+//     name: "Intermediate exercise",
+//     Type: "lorem",
+//     imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
+//   },
+//   {
+//     id: 1,
+//     name: "Intermediate exercise",
+//     Type: "lorem",
+//     imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
+//   },
+//   {
+//     id: 1,
+//     name: "Intermediate exercise",
+//     Type: "lorem",
+//     imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
+//   },
+//   {
+//     id: 1,
+//     name: "Intermediate exercise",
+//     Type: "lorem",
+//     imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
+//   },
+//   {
+//     id: 1,
+//     name: "Intermediate exercise",
+//     Type: "lorem",
+//     imageSrc: "https://app.minlaering.dk/images/icons/exercise/difficulty2.svg",
+//   },
+// ];
 
 import Search from "@/components/Search.vue";
+import {mapActions} from "vuex";
+import axios from "axios";
 
 export default {
   components: {
     Search,
   },
+  // setup() {
+  //   return {
+  //     // products,
+  //   };
+  // },
 
-  setup() {
-    return {
-      products,
-    };
+  methods: {
+      ...mapActions(['fetchSelected','fetchExercises']),
+    async select(id){
+        const response = await axios.post("http://127.0.0.1:8000/api/select", {id});
+        await this.fetchExercises()
+        await this.fetchSelected()
+        console.log(id)
+        console.log(response)
+    }
   },
+  created() {
+     this.fetchExercises()
+  }
 };
 </script>
